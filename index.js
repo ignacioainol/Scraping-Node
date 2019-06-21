@@ -48,6 +48,7 @@ scrapeUrl(baseUrl + initialUrl,[])
 
 app.get('/',(req,res) => {
 	res.json(valuesOk);
+	//dsfjdsfjsd test github
 });
 
 app.listen(3000, () => {
