@@ -1,6 +1,8 @@
 const cheerio = require('cheerio');
 const axios = require('axios');
 const fs = require('fs');
+const express = require('express');
+const app = express();
 
 const baseUrl = "https://www.paris.cl";
 const initialUrl = '/tecnologia/celulares/?sz=40&start=0';
@@ -35,3 +37,11 @@ scrapeUrl(baseUrl + initialUrl,[])
 
 		})
 	})
+
+app.get('/',(req,res) => {
+	res.send('pate juan');
+});
+
+app.listen(3000, () => {
+	console.log("server on port 3000");
+})
