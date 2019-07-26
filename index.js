@@ -26,12 +26,14 @@ axios.get('https://simple.ripley.cl/tecno/telefonia/smartphones').then(response 
 	const items = $('.catalog-container .catalog-product-item').toArray()
 		.map(item => {
 			const $item = $(item);
-			itemsOk.push( {
-				title: $item.find('.catalog-product-details__name').text(),
-				dcto: '',
-				price: '',
-				link: ''
-			})
+			if(parseInt($item.find('.catalog-product-details__discount-tag').text())){
+				itemsOk.push( {
+					title: $item.find('.catalog-product-details__name').text(),
+					dcto: Math.abs(parseInt($item.find('.catalog-product-details__discount-tag').text())),
+					price: '',
+					link: ''
+				})
+			}
 		})
 })
 
