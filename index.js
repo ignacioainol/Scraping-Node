@@ -21,6 +21,20 @@ axios.get('https://www.paris.cl/tecnologia/celulares/smartphones/')
 
 	})
 
+axios.get('https://simple.ripley.cl/tecno/telefonia/smartphones').then(response => {
+	const $ = cheerio.load(response.data);
+	const items = $('.catalog-container .catalog-product-item').toArray()
+		.map(item => {
+			const $item = $(item);
+			itemsOk.push( {
+				title: $item.find('.catalog-product-details__name').text(),
+				dcto: '',
+				price: '',
+				link: ''
+			})
+		})
+})
+
 setTimeout(function(){
 	console.log(itemsOk);
 },5000) 
