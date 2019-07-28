@@ -7,8 +7,8 @@ const app = express();
 const baseUrl = "https://www.paris.cl";
 const initialUrl = '/tecnologia/celulares/?sz=40&start=0';
 
-const smartPhone = fs.readFileSync('./items.json');
-const smartPhoneParis = JSON.parse(smartPhone);
+//const smartPhone = fs.readFileSync('./items.json');
+//const smartPhoneParis = JSON.parse(smartPhone);
 const valuesOk = [];
 
 function scrapeUrl(url,items){
@@ -39,7 +39,7 @@ function scrapeUrl(url,items){
 	
 scrapeUrl(baseUrl + initialUrl,[])
 	.then(items => {
-		fs.writeFile('./items.json',JSON.stringify(items), function(err){
+		fs.writeFile('./items.json',JSON.stringify(valuesOk), function(err){
 			if(err) return console.log(err);
 			console.log("Items saved !");
 
