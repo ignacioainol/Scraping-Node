@@ -19,8 +19,8 @@ function scrapeUrl(url,items){
 		const pageItems = $('#search-result-items li').toArray()
 			.map(item => {
 				const $item = $(item);
-				var checkDcto = $item.find('.discount-badge').text();
-					if(checkDcto){
+				let checkDcto = $item.find('.discount-badge').text();
+					if(checkDcto && parseInt(checkDcto) > 70){
 						valuesOk.push( {
 							title: $item.find('.ellipsis_text').text(),
 							dcto: parseInt($item.find('.discount-badge').text()),
