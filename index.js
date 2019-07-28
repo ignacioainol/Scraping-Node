@@ -19,8 +19,10 @@ function scrapeUrl(url,items){
 		const pageItems = $('#search-result-items li').toArray()
 			.map(item => {
 				const $item = $(item);
+				let title = $item.find('.ellipsis_text').text();
+				//let strPos_title = title.includes('Plan');
 				let checkDcto = $item.find('.discount-badge').text();
-					if(checkDcto && parseInt(checkDcto) > 70){
+					if(checkDcto && parseInt(checkDcto) > 70 && !title.includes("Plan") && !title.includes("Carcasa")){
 						valuesOk.push( {
 							title: $item.find('.ellipsis_text').text(),
 							dcto: parseInt($item.find('.discount-badge').text()),
