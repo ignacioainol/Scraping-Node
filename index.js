@@ -53,6 +53,7 @@ const valuesOk = [];
 // ------------------------------------------------------------------------
 
 // [SCRAPING TO RIPLEY.CL]
+const clearUrlRipley = "https://simple.ripley.cl";
 const baseUrlRipley = "https://simple.ripley.cl/tecno/telefonia/smartphones";
 const initialUrlRipley = '?source=menu&page=1';
 
@@ -64,15 +65,22 @@ function scrapeUrlRipley(url,items){
 		const pageItems = $('.catalog-container .catalog-product-item').toArray()
 			.map(item => {
 				const $item = $(item);
-				//let title = $item.find('.ellipsis_text').text();
+				let title = $item.find('.catalog-product-details__name').text();
 				//let strPos_title = title.includes('Plan');
-				//let checkDcto = $item.find('.discount-badge').text();
+				var price = "";
+				if($item.find('.catalog-prices__card-price')){
+					price = $item.find('.catalog-prices__card-price').text();
+				}else{
+					price = "otro";
+				}
+				let dcto = Math.abs(parseInt($item.find('.catalog-product-details__discount-tag').text()));
+					//if(dcto && dcto > 55){
 						valuesOk.push( {
-							title: $item.find('.catalog-product-details__name').text(),
-							dcto: Math.abs(parseInt($item.find('.catalog-product-details__discount-tag').text())),
-							price: '',
-							link: ''
+							title: title,
+							dcto: dcto,
+							link: clearUrlRipley + $item.attr('href')
 						})
+					//}
 			})
 		const nextLink = $('#catalog-page .catalog-page__footer-pagination ul.pagination li a').last().attr('href');
 		if(nextLink.includes('?source=menu')){
